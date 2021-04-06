@@ -5,15 +5,10 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
-import {Nav} from './components/Nav';
 import {Tags} from './views/Tags';
 import {Money} from './views/Money';
 import {Statistics} from './views/Statistics';
 import {NoMatch} from './views/NotMatch';
-
-
-
-
 
 function App() {
     return (
@@ -33,7 +28,6 @@ function App() {
                     <NoMatch/>
                 </Route>
             </Switch>
-            <Nav/>
 
         </Router>
     );
