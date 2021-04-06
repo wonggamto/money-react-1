@@ -104,6 +104,7 @@
     "styled-components": "^5.2.3",
     "svg-sprite-loader": "^6.0.2",
     "svgo-loader": "^3.0.0",
+    "@types/webpack-env": "^1.15.1",
     "types": "^0.1.1"
   },
   "jest": {
