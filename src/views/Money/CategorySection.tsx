@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import React, {useState} from 'react';
 
-const CategorySection = styled.section`
+const Wrapper = styled.section`
   font-size: 24px;
 
   > ul {
@@ -26,4 +27,22 @@ const CategorySection = styled.section`
     }
   }
 `;
-export {CategorySection}
+const CategorySection: React.FunctionComponent = (props) => {
+    // 收缩类型范围 限制在 - 和 + 的数组
+    const [categoryList] = useState<('-'|'+')[]>(['-', '+']);
+    const categoryMap = {'-':'支出','+':'收入'}
+    const [category, setCategory] = useState('-');
+    return (
+        <Wrapper>
+            <ul>
+                {categoryList.map(c =>
+                    <li className={category === c ? 'selected' : ''}
+                        onClick={() => {setCategory(c);}}>{categoryMap[c]}
+                    </li>
+                )}
+            </ul>
+            {props.children}
+        </Wrapper>
+    );
+};
+export {CategorySection};
