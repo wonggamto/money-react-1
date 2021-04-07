@@ -29,14 +29,15 @@ const Wrapper = styled.section`
 `;
 const CategorySection: React.FunctionComponent = (props) => {
     // 收缩类型范围 限制在 - 和 + 的数组
-    const [categoryList] = useState<('-'|'+')[]>(['-', '+']);
-    const categoryMap = {'-':'支出','+':'收入'}
+    const [categoryList] = useState<('-' | '+')[]>(['-', '+']);
+    const categoryMap = {'-': '支出', '+': '收入'};
     const [category, setCategory] = useState('-');
     return (
         <Wrapper>
             <ul>
                 {categoryList.map(c =>
-                    <li className={category === c ? 'selected' : ''}
+                    <li key={c}
+                        className={category === c ? 'selected' : ''}
                         onClick={() => {setCategory(c);}}>{categoryMap[c]}
                     </li>
                 )}

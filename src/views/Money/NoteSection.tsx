@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, {useState} from 'react';
 
-const _NotesSection = styled.section`
+const Wrapper = styled.section`
   background: #f5f5f5;
   padding: 0px 16px;
   font-size: 14px;
@@ -29,13 +29,13 @@ const NoteSection: React.FunctionComponent = (props) => {
     const [note,setNote] = useState('')
     console.log(note);
     return (
-        <_NotesSection>
+        <Wrapper>
             <label>
                 <span>备注</span>
                 <input type="text" placeholder="在这里添加备注" value={note}
                        onChange={(e)=>{setNote(e.target.value)}}/>
             </label>
-        </_NotesSection>
+        </Wrapper>
     );
 };
 export {NoteSection};
