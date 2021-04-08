@@ -1,43 +1,7 @@
-import styled from 'styled-components';
 import React, {useState} from 'react';
+import {Wrapper} from './NumberPadSection/NumberPadSection';
+import {generateOutput} from './NumberPadSection/generateOutput';
 
-const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-
-  > .output {
-    background: white;
-    font-size: 36px;
-    line-height: 72px;
-    text-align: right;
-    padding: 0 16px;
-    box-shadow: inset 0 -5px 5px -5px rgba(0, 0, 0, 0.25);
-  }
-
-  > .pad {
-    > button {
-      border: none;
-      font-size: 18px;
-      float: left;
-      width: 25%;
-      height: 64px;
-      background: #e0e0e0;
-
-      &:active {
-        background: #f2f2f2;
-      }
-
-      &.ok {
-        height: 128px;
-        float: right;
-      }
-
-      &.zero {
-        width: 50%;
-      }
-    }
-  }
-`;
 const NumberPadSection: React.FunctionComponent = (props) => {
     const [output, _setOutput] = useState('0');
     const setOutput = (output: string) => {
@@ -51,42 +15,12 @@ const NumberPadSection: React.FunctionComponent = (props) => {
     const onClickButtonWrapper = (e: React.MouseEvent) => {
         const text = (e.target as HTMLButtonElement).textContent;
         if (text === null) {return;}
-        {
-            switch (text) {
-                case '0':
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    if (output === '0') {
-                        setOutput(text);
-                    } else {
-                        setOutput(output + text);
-                    }
-                    break;
-                case '删除':
-                    if (output.length === 1) {
-                        setOutput('');
-                    } else {
-                        setOutput(output.slice(0, output.length - 1));
-                    }
-                    break;
-                case '清空':
-                    setOutput('');
-                    break;
-                case 'OK':
-                    console.log('ok');
-                    break;
-                case '.':
-                    if (output.indexOf('.') >= 0) {return;}
-                    setOutput(output + '.');
-                    break;
-            }
+        if (text === 'OK') {
+            //TODO
+            return;
+        }
+        if ('0123456789.'.split('').concat(['删除', '清空']).indexOf(text) >= 0) {
+            setOutput(generateOutput(text, output));
         }
     };
     return (
