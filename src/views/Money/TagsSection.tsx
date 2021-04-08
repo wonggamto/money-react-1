@@ -20,7 +20,8 @@ const Wrapper = styled.section`
       padding: 4px 18px;
       font-size: 14px;
       margin: 8px 12px;
-      &.selected{
+
+      &.selected {
         background: #f60;
       }
     }
@@ -36,9 +37,14 @@ const Wrapper = styled.section`
 
   }
 `;
-const TagsSection: React.FunctionComponent = (props) => {
+
+type Props = {
+    value: string[];//函数组件的参数类型
+    onChange: (selected: string[]) => void;
+}
+const TagsSection: React.FunctionComponent<Props> = (props) => {
     const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行']);
-    const [selectedTags, setSelectedTags] = useState<string[]>([]);
+    const selectedTags = props.value;
     const onAddTag = () => {
         const tagName = window.prompt('请输入标签名:');
         if (tagName !== null) {
@@ -49,9 +55,9 @@ const TagsSection: React.FunctionComponent = (props) => {
         const index = selectedTags.indexOf(tag);
         if (index >= 0) {
             //如果tag已经被选中，就复制所有没被选中的tag，作为新的 selectedTag
-            setSelectedTags(selectedTags.filter(t => t !== tag));
+            props.onChange(selectedTags.filter(t => t !== tag));
         } else {
-            setSelectedTags([...selectedTags, tag]);
+            props.onChange([...selectedTags, tag]);
         }
     };
     return (
@@ -60,7 +66,7 @@ const TagsSection: React.FunctionComponent = (props) => {
             <ol>
                 {tags.map(tag =>
                     <li key={tag} onClick={() => onToggleTag(tag)}
-                    className={selectedTags.indexOf(tag)>=0?'selected':''}>{tag}</li>
+                        className={selectedTags.indexOf(tag) >= 0 ? 'selected' : ''}>{tag}</li>
                 )}
 
 

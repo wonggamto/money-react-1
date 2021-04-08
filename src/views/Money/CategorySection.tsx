@@ -27,18 +27,23 @@ const Wrapper = styled.section`
     }
   }
 `;
-const CategorySection: React.FunctionComponent = (props) => {
+//函数组件参数类型
+type Props = {
+    value: '-' | '+';
+    onChange: (value: '-'|'+') => void
+}
+const CategorySection: React.FunctionComponent<Props> = (props) => {
     // 收缩类型范围 限制在 - 和 + 的数组
     const [categoryList] = useState<('-' | '+')[]>(['-', '+']);
     const categoryMap = {'-': '支出', '+': '收入'};
-    const [category, setCategory] = useState('-');
+    const category = props.value
     return (
         <Wrapper>
             <ul>
                 {categoryList.map(c =>
                     <li key={c}
                         className={category === c ? 'selected' : ''}
-                        onClick={() => {setCategory(c);}}>{categoryMap[c]}
+                        onClick={() => {props.onChange(c);}}>{categoryMap[c]}
                     </li>
                 )}
             </ul>
