@@ -1,5 +1,6 @@
 import {Wrapper} from './NumberPadSection/NumberPadSection';
 import {generateOutput} from './NumberPadSection/generateOutput';
+import {useState} from 'react';
 
 //函数组件参数类型
 type Props = {
@@ -8,24 +9,26 @@ type Props = {
     onOk?: () => void;
 
 }
+// 小数点直接 parseFloat会导致视图无法显示，所以分以下两种情况，1.视图中现实的为 string 类型，2.后台拿到的为 float 类型
 const NumberPadSection: React.FunctionComponent<Props> = (props) => {
-    const output = props.value.toString();
+    const [output, _setOutput] = useState(props.value.toString());
     const setOutput = (output: string) => {
-        let value;
+        let newOutput: string;
         if (output.length > 16) {
-            value = parseFloat(output.slice(0, 16));
+            newOutput = output.slice(0, 16);
         } else if (output.length === 0) {
-            value = 0;
+            newOutput = '0';
         } else {
-            value = parseFloat(output);
+            newOutput = output;
         }
-        props.onChange(value);
+        _setOutput(newOutput);//视图中展示的值
+        props.onChange(parseFloat(newOutput));//后台数据拿到的值
     };
     const onClickButtonWrapper = (e: React.MouseEvent) => {
         const text = (e.target as HTMLButtonElement).textContent;
         if (text === null) {return;}
         if (text === 'OK') {
-            if (props.onOk){props.onOk();}
+            if (props.onOk) {props.onOk();}
             return;
         }
         if ('0123456789.'.split('').concat(['删除', '清空']).indexOf(text) >= 0) {
