@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-// 获取、设置 tags 的函数
+// 封装自定义的获取、设置 tags 的Hook
 const useTags = () => {
 
     const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行']);
