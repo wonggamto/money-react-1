@@ -3,13 +3,15 @@ import {
     HashRouter as Router,
     Switch,
     Route,
-    Redirect
+    Redirect,
+    Link
 } from "react-router-dom";
 import {Tags} from './views/Tags';
 import {Money} from './views/Money';
 import {Statistics} from './views/Statistics';
 import {NoMatch} from './views/NotMatch';
 import styled from 'styled-components';
+import {Tag} from "./views/Tag";
 
 const AppWrapper = styled.div`
   color:#333;
@@ -20,6 +22,9 @@ function App() {
             <Switch>
                 <Route path="/tags">
                     <Tags/>
+                </Route>
+                <Route path="/tags/:tag">
+                    <Tag/>
                 </Route>
                 <Route path="/money">
                     <Money/>
