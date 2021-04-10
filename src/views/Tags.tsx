@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import {Icon} from '../components/Icon';
 import {Link} from 'react-router-dom';
 import {Button} from '../components/Button';
+import {Center} from '../components/Center';
+import {Space} from '../components/Space';
 
 const TagList = styled.ol`
   font-size: 16px;
@@ -30,22 +32,7 @@ const TagList = styled.ol`
         height: 2em;
       }
     }
-
-
   }
-
-`;
-
-//居中标签
-const Center = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-// 空白块标签
-const Space = styled.div`
-  height: 16px;
 `;
 
 //tags页面
@@ -64,6 +51,7 @@ function Tags() {
                 )}
             </TagList>
             <Center>
+                <Space/>
                 <Space/>
                 <Space/>
                 <Button>新增标签</Button>
