@@ -17,7 +17,7 @@ type Category = '-' | '+'
 function Money() {
     //默认值数据
     const [selected, setSelected] = useState({
-        tags: [] as string[],
+        tagIds: [] as number[],
         note: '',
         category: '-' as Category,
         amount: 0 //默认金额
@@ -32,8 +32,8 @@ function Money() {
     };
     return (
         <MyLayout>
-            {selected.tags}
-            <TagsSection value={selected.tags} onChange={(tags) => onChange({tags: tags})}/>
+            {selected.tagIds}
+            <TagsSection value={selected.tagIds} onChange={(tagIds) => onChange({tagIds: tagIds})}/>
             {selected.note}
             <NoteSection value={selected.note} onChange={(note) => onChange({note: note})}/>
             {selected.category}

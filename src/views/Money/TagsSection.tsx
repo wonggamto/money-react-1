@@ -40,25 +40,26 @@ const Wrapper = styled.section`
 `;
 
 type Props = {
-    value: string[];//函数组件的参数类型
-    onChange: (selected: string[]) => void;
+    value: number[];//函数组件的参数类型
+    onChange: (selected: number[]) => void;
 }
 const TagsSection: React.FunctionComponent<Props> = (props) => {
     const {tags, setTags} = useTags();
-    const selectedTags = props.value;
+    const selectedTagIds = props.value;
     const onAddTag = () => {
         const tagName = window.prompt('请输入标签名:');
         if (tagName !== null) {
-            setTags([...tags, tagName]);
+
+            setTags([...tags, {id:Math.random(),name:tagName}]);
         }
     };
-    const onToggleTag = (tag: string) => {
-        const index = selectedTags.indexOf(tag);
+    const onToggleTag = (tagId: number) => {
+        const index = selectedTagIds.indexOf(tagId);
         if (index >= 0) {
             //如果tag已经被选中，就复制所有没被选中的tag，作为新的 selectedTag
-            props.onChange(selectedTags.filter(t => t !== tag));
+            props.onChange(selectedTagIds.filter(t => t !== tagId));
         } else {
-            props.onChange([...selectedTags, tag]);
+            props.onChange([...selectedTagIds, tagId]);
         }
     };
     return (
@@ -66,8 +67,8 @@ const TagsSection: React.FunctionComponent<Props> = (props) => {
         <Wrapper>
             <ol>
                 {tags.map(tag =>
-                    <li key={tag} onClick={() => onToggleTag(tag)}
-                        className={selectedTags.indexOf(tag) >= 0 ? 'selected' : ''}>{tag}</li>
+                    <li key={tag.id} onClick={() => onToggleTag(tag.id)}
+                        className={selectedTagIds.indexOf(tag.id) >= 0 ? 'selected' : ''}>{tag.name}</li>
                 )}
 
 
