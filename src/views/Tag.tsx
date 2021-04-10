@@ -37,7 +37,7 @@ const Tag: React.FunctionComponent = (props) => {
                 <Icon name=""/>
             </Topbar>
             <InputWrapper>
-                <Input label="标签名" type="text" placeholder="请输入标签名"/>
+                <Input label="标签名" type="text" placeholder="请输入标签名" value={tag.name}/>
             </InputWrapper>
             <Center>
                 <Space/>

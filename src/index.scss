@@ -38,8 +38,9 @@ body {
   height: 1em;
 }
 
-button {
+button, input {
   font-family: inherit;
+  font-size: inherit;
 }
 
 :focus {
@@ -51,7 +52,8 @@ button {
   display: block;
   clear: both;
 }
-.oneLine{//超出一行的文本用省略号代替
+
+.oneLine { //超出一行的文本用省略号代替
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
