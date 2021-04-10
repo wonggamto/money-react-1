@@ -4,7 +4,6 @@ import {
     Switch,
     Route,
     Redirect,
-    Link
 } from "react-router-dom";
 import {Tags} from './views/Tags';
 import {Money} from './views/Money';
@@ -14,35 +13,36 @@ import styled from 'styled-components';
 import {Tag} from "./views/Tag";
 
 const AppWrapper = styled.div`
-  color:#333;
+  color: #333;
 `;
+
 function App() {
     return (
-        <Router>
-            <Switch>
-                <Route path="/tags">
-                    <Tags/>
-                </Route>
-                <Route path="/tags/:tag">
-                    <Tag/>
-                </Route>
-                <Route path="/money">
-                    <Money/>
-                </Route>
-                <Route path="/statistics">
-                   <Statistics/>
-                </Route>
-                <Redirect exact from="/" to="/money"/>
-                <Route path="*">
-                    <NoMatch/>
-                </Route>
-            </Switch>
+        <AppWrapper>
+            <Router>
+                <Switch>
+                    <Route path="/tags/:tag" exact={true}>
+                        <Tag/>
+                    </Route>
+                    <Route path="/tags" exact={true}>
+                        <Tags/>
+                    </Route>
+                    <Route path="/money" exact={true}>
+                        <Money/>
+                    </Route>
+                    <Route path="/statistics" exact={true}>
+                        <Statistics/>
+                    </Route>
+                    <Redirect from="/" to="/money" exact={true}/>
+                    <Route path="*">
+                        <NoMatch/>
+                    </Route>
+                </Switch>
+            </Router>
+        </AppWrapper>
 
-        </Router>
     );
 }
-
-
 
 
 export default App;
