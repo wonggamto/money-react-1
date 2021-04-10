@@ -15,7 +15,7 @@ const useTags = () => {
         return tags.filter(tag => tag.id === id)[0];
     };
     //根据 tag 的id 查找tag 的下标
-    const findeTagIndex = (id: number) => {
+    const findTagIndex = (id: number) => {
         let result = -1;//
         for (let i = 0; i < tags.length; i++) {
             if (tags[i].id === id) {
@@ -26,18 +26,29 @@ const useTags = () => {
         return result;
     };
     const updateTag = (id: number, obj: { name: string }) => {
-        const index = findeTagIndex(id);
+        //获取 要改的tag 的下标
+        const index = findTagIndex(id);
         //深拷贝 tags 得到tagsClone
         const tagsClone = JSON.parse(JSON.stringify(tags));
         // 把 tagsClone 的第 index项删掉，换成{id:id,name:obj.name}
         tagsClone.splice(index, 1, {id: id, name: obj.name});
         setTags(tagsClone);
     };
+    const deleteTag = (id: number) => {
+        //获取 要改的tag 的下标
+        const index = findTagIndex(id);
+        //深拷贝 tags 得到tagsClone
+        const tagsClone = JSON.parse(JSON.stringify(tags));
+        // 把 tagsClone 的 第index 项删掉
+        tagsClone.splice(index, 1);
+        setTags(tagsClone);
+    };
     return {
         tags: tags,
         setTags: setTags,
         findTag: findTag,
-        updateTag: updateTag
+        updateTag: updateTag,
+        deleteTag: deleteTag
     };
 };
 export {useTags};
