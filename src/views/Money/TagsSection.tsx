@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import {useTags} from '../../useTags';
-import {Button} from '../../components/Button';
+import {useTags} from 'hooks/useTags';
 //标签组件
 const Wrapper = styled.section`
   background: #FFF;

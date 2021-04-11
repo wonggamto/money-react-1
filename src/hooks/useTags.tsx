@@ -1,6 +1,6 @@
-import {useEffect, useRef, useState} from 'react';
-import {createId} from './libs/createId';
-import {useUpdate} from './hooks/useUpdate';
+import {useEffect, useState} from 'react';
+import {createId} from '../libs/createId';
+import {useUpdate} from './useUpdate';
 
 
 // 封装自定义的获取、设置 tags 的Hook

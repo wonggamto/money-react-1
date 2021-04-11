@@ -6,7 +6,7 @@ import {useState} from 'react';
 type Props = {
     value: number;
     onChange: (value: number) => void;
-    onOk?: () => void;
+    onOk: () => void;
 
 }
 // 小数点直接 parseFloat会导致视图无法显示，所以分以下两种情况，1.视图中现实的为 string 类型，2.后台拿到的为 float 类型
