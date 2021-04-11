@@ -1,6 +1,6 @@
 import React from "react";
 import {useTags} from 'useTags';
-import {useParams} from "react-router-dom";
+import {useParams, useHistory} from "react-router-dom";
 import {Layout} from 'components/Layout';
 import {Icon} from '../components/Icon';
 import {Button} from '../components/Button';
@@ -24,12 +24,12 @@ const InputWrapper = styled.div`
   background: white;
   padding: 0 16px;
   margin-top: 8px;
-`;
+`
 const Tag: React.FunctionComponent = (props) => {
     const {findTag, updateTag, deleteTag} = useTags();
     let {id: idString} = useParams<Params>();
     const tag = findTag(parseInt(idString));
-    const tagContent = (tag:{id:number;name:string})=>(
+    const tagContent = (tag: { id: number; name: string }) => (
         <div>
             <InputWrapper>
                 <Input label="标签名" type="text"
@@ -46,10 +46,14 @@ const Tag: React.FunctionComponent = (props) => {
                 <Button onClick={() => deleteTag(tag.id)}>删除标签</Button>
             </Center>
         </div>);
+    const history = useHistory();
+    const onClickBack = () => {
+        history.goBack();
+    };
     return (
         <Layout>
             <Topbar>
-                <Icon name="back"/>
+                <Icon name="back" onClick={onClickBack}/>
                 <span>编辑标签</span>
                 <Icon name=""/>
             </Topbar>
