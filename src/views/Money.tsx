@@ -25,7 +25,7 @@ const defaultFormData = {
 function Money() {
     //默认值数据
     const [selected, setSelected] = useState(defaultFormData);
-    const { addRecord} = useRecords();
+    const {addRecord} = useRecords();
     type Selected = typeof selected;
     const onChange = (obj: Partial<Selected>) => {
         setSelected({
@@ -38,6 +38,10 @@ function Money() {
         addRecord(selected);
         alert('保存成功');
         setSelected(defaultFormData);
+        //刷新后更新 output 的 UI ，
+        setTimeout(() => {
+            window.location.reload();
+        }, 1);
     };
     return (
         <MyLayout>

@@ -1,12 +1,12 @@
 import {Wrapper} from './NumberPadSection/NumberPadSection';
 import {generateOutput} from './NumberPadSection/generateOutput';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 //函数组件参数类型
 type Props = {
     value: number;
     onChange: (value: number) => void;
-    onOk: () => void;
+    onOk?: () => void;
 
 }
 // 小数点直接 parseFloat会导致视图无法显示，所以分以下两种情况，1.视图中现实的为 string 类型，2.后台拿到的为 float 类型
@@ -26,9 +26,13 @@ const NumberPadSection: React.FunctionComponent<Props> = (props) => {
     };
     const onClickButtonWrapper = (e: React.MouseEvent) => {
         const text = (e.target as HTMLButtonElement).textContent;
-        if (text === null) {return;}
+        if (text === null) {
+            return;
+        }
         if (text === 'OK') {
-            if (props.onOk) {props.onOk();}
+            if (props.onOk) {
+                props.onOk();
+            }
             return;
         }
         if ('0123456789.'.split('').concat(['删除', '清空']).indexOf(text) >= 0) {

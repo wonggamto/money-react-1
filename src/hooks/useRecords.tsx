@@ -19,10 +19,11 @@ const useRecords = () => {
     }, [records]);
     const addRecord = (record: RecordItem) => {
         setRecords([...records, record]);
+
     };
 
     return {
-        records, addRecord
+        records, addRecord,
     };
 };
 export {useRecords};
