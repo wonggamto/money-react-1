@@ -36,7 +36,6 @@ const Wrapper = styled.section`
     border-bottom: 1px solid #333;
     color: #666;
     margin-top: 8px;
-
   }
 `;
 
@@ -68,7 +67,7 @@ const TagsSection: React.FunctionComponent<Props> = (props) => {
 
 
             </ol>
-            <Button onClick={addTag}>新增标签</Button>
+            <button onClick={addTag}>新增标签</button>
         </Wrapper>
     );
 };

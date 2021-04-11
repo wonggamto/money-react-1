@@ -1,16 +1,33 @@
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {createId} from './libs/createId';
+import {useUpdate} from './hooks/useUpdate';
 
-const defaultTags = [
-    {id: createId(), name: '衣'},
-    {id: createId(), name: '食'},
-    {id: createId(), name: '住'},
-    {id: createId(), name: '行'}
-];
+
 // 封装自定义的获取、设置 tags 的Hook
 const useTags = () => {
-
-    const [tags, setTags] = useState<{ id: number; name: string }[]>(defaultTags);
+    const [tags, setTags] = useState<{ id: number; name: string }[]>([]);
+    useEffect(() => {
+        let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]');
+        if (localTags.length === 0) {
+            localTags = [
+                {id: createId(), name: '衣'},
+                {id: createId(), name: '食'},
+                {id: createId(), name: '住'},
+                {id: createId(), name: '行'}
+            ];
+        }
+        setTags(localTags);
+    }, []);//组件挂载时执行
+    useUpdate(() => {
+        window.localStorage.setItem('tags', JSON.stringify(tags));
+    }, [tags]);
+    //创建标签
+    const addTag = () => {
+        const tagName = window.prompt('请输入标签名:');
+        if (tagName !== null && tagName !== '') {
+            setTags([...tags, {id: createId(), name: tagName}]);
+        }
+    };
     const findTag = (id: number) => {//根据 id 查找 tag
         return tags.filter(tag => tag.id === id)[0];
     };
@@ -27,10 +44,10 @@ const useTags = () => {
     };
     const updateTag = (id: number, obj: { name: string }) => {
         setTags(tags.map(
-            tag=>{
-                return tag.id === id ? {id,name:obj.name} : tag;
+            tag => {
+                return tag.id === id ? {id, name: obj.name} : tag;
             }
-        ))
+        ));
         // //获取 要改的tag 的下标
         // const index = findTagIndex(id);
         // //深拷贝 tags 得到tagsClone
@@ -40,7 +57,7 @@ const useTags = () => {
         // setTags(tagsClone);
     };
     const deleteTag = (id: number) => {
-        setTags(tags.filter(tag => tag.id !== id))
+        setTags(tags.filter(tag => tag.id !== id));
         // //获取 要改的tag 的下标
         // const index = findTagIndex(id);
         // //深拷贝 tags 得到tagsClone
@@ -54,7 +71,8 @@ const useTags = () => {
         setTags: setTags,
         findTag: findTag,
         updateTag: updateTag,
-        deleteTag: deleteTag
+        deleteTag: deleteTag,
+        addTag: addTag
     };
 };
 export {useTags};
