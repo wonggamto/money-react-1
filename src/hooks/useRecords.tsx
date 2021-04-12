@@ -8,7 +8,7 @@ type newRecordItem = {
     category: '+' | '-';
     amount: number;
 }
-type RecordItem = newRecordItem &{
+type RecordItem = newRecordItem & {
     createdAt: string;
 }
 const useRecords = () => {
@@ -20,9 +20,13 @@ const useRecords = () => {
         window.localStorage.setItem('records', JSON.stringify(records));
     }, [records]);
     const addRecord = (newRecord: newRecordItem) => {
-        const record = {...newRecord,createdAt:(new Date()).toISOString()}
+        if (newRecord.amount <= 0) {
+            alert('金额不能为0');
+            return false;
+        }
+        const record = {...newRecord, createdAt: (new Date()).toISOString()};
         setRecords([...records, record]);
-
+        return true;
     };
 
     return {
