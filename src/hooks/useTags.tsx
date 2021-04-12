@@ -20,7 +20,7 @@ const useTags = () => {
     }, []);//组件挂载时执行
     useUpdate(() => {
         window.localStorage.setItem('tags', JSON.stringify(tags));
-    }, [tags]);
+    }, tags);
     //创建标签
     const addTag = () => {
         const tagName = window.prompt('请输入标签名:');

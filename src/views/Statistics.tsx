@@ -63,7 +63,6 @@ function Statistics() {
                 <div>
                     {records.map(r => {
                         return <Item>
-                            {/*{dayjs(r.createdAt).format('YYYY年MM月DD日')}*/}
                             <div className="tags oneLine">
                                 {r.tagIds.map(tagId => <span key={tagId}>{getTagName(tagId)}</span>)
                                     .reduce((result,span,index,array)=>

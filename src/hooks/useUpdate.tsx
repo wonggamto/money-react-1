@@ -1,6 +1,6 @@
 import {useEffect, useRef} from 'react';
 //防止 多余的 setItem 的hooks
-const useUpdate = (fn:()=>void,deps:any[]) => {
+const useUpdate = (fn:()=>void,dependency:any[]) => {
     const count = useRef(0);//计数器，如果 count > 1 表示不是第一次
     useEffect(() => {
         count.current += 1;
@@ -9,6 +9,6 @@ const useUpdate = (fn:()=>void,deps:any[]) => {
         if (count.current > 1) {
             fn();
         }
-    }, [deps]);
+    }, [fn,dependency]);
 };
 export {useUpdate};
