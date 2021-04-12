@@ -18,7 +18,7 @@ const defaultFormData = {
     tagIds: [] as number[],
     note: '',
     category: '-' as Category,
-    amount: 0 //默认金额
+    amount: 0 ,//默认金额
 };
 
 //money页面

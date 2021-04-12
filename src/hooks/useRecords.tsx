@@ -2,12 +2,14 @@
 import {useEffect, useState} from 'react';
 import {useUpdate} from './useUpdate';
 
-type RecordItem = {
+type newRecordItem = {
     tagIds: number[];
     note: string;
     category: '+' | '-';
     amount: number;
-    // createdAt: string;
+}
+type RecordItem = newRecordItem &{
+    createdAt: string;
 }
 const useRecords = () => {
     const [records, setRecords] = useState<RecordItem[]>([]);
@@ -17,7 +19,8 @@ const useRecords = () => {
     useUpdate(() => {
         window.localStorage.setItem('records', JSON.stringify(records));
     }, [records]);
-    const addRecord = (record: RecordItem) => {
+    const addRecord = (newRecord: newRecordItem) => {
+        const record = {...newRecord,createdAt:(new Date()).toISOString()}
         setRecords([...records, record]);
 
     };
