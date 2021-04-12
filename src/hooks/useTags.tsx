@@ -66,13 +66,24 @@ const useTags = () => {
         // tagsClone.splice(index, 1);
         // setTags(tagsClone);
     };
+    //根据id获取tagName
+    const getTagName = (id: number) => {
+        const tagName = tags.filter(t => t.id === id)[0];
+        if (tagName) {
+            return tagName.name;
+        } else {
+            return '';
+        }
+    };
     return {
         tags: tags,
         setTags: setTags,
         findTag: findTag,
         updateTag: updateTag,
         deleteTag: deleteTag,
-        addTag: addTag
+        addTag: addTag,
+        getTagName: getTagName,
+
     };
 };
 export {useTags};

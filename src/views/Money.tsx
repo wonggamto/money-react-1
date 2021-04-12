@@ -18,8 +18,11 @@ const defaultFormData = {
     tagIds: [] as number[],
     note: '',
     category: '-' as Category,
-    amount: 0 ,//默认金额
+    amount: 0,//默认金额
 };
+const CategoryWrapper = styled.div`
+  background: #c4c4c4;
+`;
 
 //money页面
 function Money() {
@@ -35,21 +38,25 @@ function Money() {
 
     };
     const submit = () => {
-        if(addRecord(selected)){
-        alert('保存成功');
-        setSelected(defaultFormData);
+        if (addRecord(selected)) {
+            alert('保存成功');
+            setSelected(defaultFormData);
             //刷新后更新 output 的 UI ，
             setTimeout(() => {
                 window.location.reload();
             }, 1);
-        };
+        }
+        ;
     };
     return (
         <MyLayout>
             {JSON.stringify(selected)}
             <TagsSection value={selected.tagIds} onChange={(tagIds) => onChange({tagIds: tagIds})}/>
             <NoteSection value={selected.note} onChange={(note) => onChange({note: note})}/>
-            <CategorySection value={selected.category} onChange={(category) => onChange({category: category})}/>
+            <CategoryWrapper>
+                <CategorySection value={selected.category}
+                                 onChange={(category) => onChange({category: category})}/>
+            </CategoryWrapper>
             <NumberPadSection value={selected.amount} onChange={(amount) => onChange({amount: amount})}
                               onOk={submit}/>
         </MyLayout>
