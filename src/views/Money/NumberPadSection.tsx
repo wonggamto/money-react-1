@@ -1,6 +1,6 @@
 import {Wrapper} from './NumberPadSection/NumberPadSection';
 import {generateOutput} from './NumberPadSection/generateOutput';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 
 //函数组件参数类型
 type Props = {

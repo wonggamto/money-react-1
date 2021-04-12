@@ -45,8 +45,7 @@ function Money() {
             setTimeout(() => {
                 window.location.reload();
             }, 1);
-        }
-        ;
+        };
     };
     return (
         <MyLayout>

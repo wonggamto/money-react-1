@@ -1,7 +1,5 @@
 //获取button的文本
-
 const generateOutput = (text: string, output: string) => {
-    {
         switch (text) {
             case '0':
             case '1':
@@ -27,11 +25,12 @@ const generateOutput = (text: string, output: string) => {
             case '清空':
                 return '';
             case '.':
-                if (output.indexOf('.') >= 0) {return output;}
+                if (output.indexOf('.') >= 0) {
+                    return output;
+                }
                 return output + '.';
             default:
                 return '';
         }
-    }
 };
 export {generateOutput};

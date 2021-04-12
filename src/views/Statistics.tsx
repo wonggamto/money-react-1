@@ -37,7 +37,7 @@ function Statistics() {
     const hash: { [Key: string]: RecordItem[] } = {};
     //根据选中的类型 进行数据分组
     const selectedRecords = records.filter(r => r.category === category);
-    selectedRecords.map(r => {
+    selectedRecords.forEach(r => {
         const key = dayjs(r.createdAt).format('YYYY年MM月DD日');
         if (!(key in hash)) {
             hash[key] = [];
