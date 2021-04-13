@@ -1,13 +1,17 @@
 import {Layout} from '../components/Layout';
-import React, {ReactNode, useState} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import {CategorySection} from './Money/CategorySection';
 import styled from 'styled-components';
 import {RecordItem, useRecords} from '../hooks/useRecords';
 import {useTags} from '../hooks/useTags';
 import dayjs from 'dayjs';
 
+
 const CategoryWrapper = styled.div`
   background: white;
+  > #main{height: 200px;
+  width: 300px;
+  border: 1px solid red;}
 `;
 const Item = styled.div`
   display: flex;
@@ -28,8 +32,10 @@ const Header = styled.h3`
   line-height: 20px;
   padding: 10px 16px;
 `;
+
+
 //统计页面
-function Statistics() {
+function Statistics(props:any) {
     const [category, setCategory] = useState<'-' | '+'>('-');
     const {records} = useRecords();
     const {getTagName} = useTags();
@@ -50,29 +56,26 @@ function Statistics() {
         if (a[0] < b[0]) return 1;
         return 0;
     });
-    console.log(array);
     return (
         <Layout>
             <CategoryWrapper>
                 <CategorySection value={category}
                                  onChange={value => setCategory(value)}/>
             </CategoryWrapper>
-
-            {array.map(([date,records])=><div>
-
+            {array.map(([date, records]) => <div key={date}>
                 <Header>
                     {date}
                 </Header>
                 <div>
                     {records.map(r => {
-                        return <Item>
+                        return <Item key={r.createdAt}>
                             <div className="tags oneLine">
                                 {r.tagIds.map(tagId => <span key={tagId}>{getTagName(tagId)}</span>)
-                                    .reduce((result,span,index,array)=>
-                                        result.concat(index < array.length -1 ? [span,'，']:[span]),[] as ReactNode[])
+                                    .reduce((result, span, index, array) =>
+                                        result.concat(index < array.length - 1 ? [span, '，'] : [span]), [] as ReactNode[])
                                 }
                             </div>
-                            {r.note ? <div className="note"> {r.note}</div> : null}
+                            {r.note ? <div className="note" key={r.note}> {r.note}</div> : null}
                             <div className="amount">
                                 ￥{r.amount}
                             </div>

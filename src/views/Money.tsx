@@ -19,6 +19,7 @@ const defaultFormData = {
     note: '',
     category: '-' as Category,
     amount: 0,//默认金额
+    createdAt: new Date()
 };
 const CategoryWrapper = styled.div`
   background: #c4c4c4;
@@ -45,12 +46,14 @@ function Money() {
             setTimeout(() => {
                 window.location.reload();
             }, 0);
-        };
+        }
+        ;
     };
+
     return (
         <MyLayout scrollTop={9999}>
             <TagsSection value={selected.tagIds} onChange={(tagIds) => onChange({tagIds: tagIds})}/>
-            <NoteSection value={selected.note} onChange={(note) => onChange({note: note})}/>
+            <NoteSection placeholder="请输入备注" value={selected.note} onChange={(note) => onChange({note: note})}/>
             <CategoryWrapper>
                 <CategorySection value={selected.category}
                                  onChange={(category) => onChange({category: category})}/>

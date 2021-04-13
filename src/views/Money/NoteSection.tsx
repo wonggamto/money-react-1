@@ -11,16 +11,18 @@ const Wrapper = styled.section`
 //函数组件 参数类型
 type Props = {
     value: string;
-    onChange: (value: string) => void
+    onChange: (value: string) => void;
+    placeholder: string
 }
 const NoteSection: React.FunctionComponent<Props> = (props) => {
     const note = props.value;
-    const onChange:ChangeEventHandler<HTMLInputElement> = (e) => {
+    const placeholder = props.placeholder;
+    const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         props.onChange(e.target.value);
     };
     return (
         <Wrapper>
-            <Input type="text" label="备注" value={note} onChange={onChange} placeholder="请输入备注"/>
+            <Input type="text" label="备注" value={note} onChange={onChange} placeholder={placeholder}/>
         </Wrapper>
     );
 };
