@@ -44,11 +44,11 @@ function Money() {
             //刷新后更新 output 的 UI ，
             setTimeout(() => {
                 window.location.reload();
-            }, 1);
+            }, 0);
         };
     };
     return (
-        <MyLayout>
+        <MyLayout scrollTop={9999}>
             <TagsSection value={selected.tagIds} onChange={(tagIds) => onChange({tagIds: tagIds})}/>
             <NoteSection value={selected.note} onChange={(note) => onChange({note: note})}/>
             <CategoryWrapper>
