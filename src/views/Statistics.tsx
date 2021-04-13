@@ -1,5 +1,5 @@
 import {Layout} from '../components/Layout';
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, {ReactNode,useState} from 'react';
 import {CategorySection} from './Money/CategorySection';
 import styled from 'styled-components';
 import {RecordItem, useRecords} from '../hooks/useRecords';
